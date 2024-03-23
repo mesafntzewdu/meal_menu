@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:meals/model/category.dart';
-import 'package:meals/screens/meals.dart';
 
 class CategoryGirdItem extends StatelessWidget {
   const CategoryGirdItem(
@@ -14,11 +13,11 @@ class CategoryGirdItem extends StatelessWidget {
     return InkWell(
       onTap: onSelectCategory,
       splashColor: Theme.of(context).colorScheme.primary,
-      borderRadius: const BorderRadius.all(Radius.circular(10)),
+      borderRadius: const BorderRadius.all(Radius.circular(15)),
       child: Container(
-        padding: const EdgeInsets.all(25),
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(
             colors: [
               category.color.withOpacity(0.50),
@@ -30,9 +29,7 @@ class CategoryGirdItem extends StatelessWidget {
         ),
         child: Text(
           category.title,
-          style: TextStyle(
-            color: Theme.of(context).copyWith().colorScheme.onPrimary,
-          ),
+          style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
     );
