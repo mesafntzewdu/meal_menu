@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meals/model/meal.dart';
+import 'package:meals/screens/meals_details.dart';
 import 'package:meals/widget/meal_traits.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -18,6 +19,16 @@ class MealsItem extends StatelessWidget {
         meal.affordability.name.substring(1);
   }
 
+  void getIntoDetail(context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {
+          return MealDetail(meal: meal);
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -25,7 +36,9 @@ class MealsItem extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       clipBehavior: Clip.hardEdge,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          getIntoDetail(context);
+        },
         child: Stack(
           children: [
             FadeInImage.memoryNetwork(

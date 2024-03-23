@@ -27,9 +27,12 @@ class CategoryGirdItem extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
         ),
-        child: Text(
+        child: Text(  
           category.title,
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(color: Colors.white),
         ),
       ),
     );
