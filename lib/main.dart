@@ -5,6 +5,14 @@ import 'package:meals/screens/tab_bar.dart';
 final theme = ThemeData(
   colorScheme: ColorScheme.fromSeed(
     seedColor: const Color.fromARGB(255, 131, 57, 0),
+    brightness: Brightness.light,
+  ),
+  textTheme: GoogleFonts.latoTextTheme(),
+);
+
+final dartTheme = ThemeData(
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: const Color.fromARGB(255, 131, 57, 0),
     brightness: Brightness.dark,
   ),
   textTheme: GoogleFonts.latoTextTheme(),
@@ -20,8 +28,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: theme,
-      home: const TabScreen(),
+      darkTheme: dartTheme,
+      themeMode: ThemeMode.system,
+      home: TabScreen(),
     );
   }
 }

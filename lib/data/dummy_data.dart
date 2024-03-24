@@ -10,8 +10,8 @@ class DummyData {
     Category(id: 'c4', title: 'Meet', color: Colors.red),
     Category(id: 'c5', title: 'Quick and Easy', color: Colors.orange),
     Category(id: 'c6', title: 'Chocolates', color: Colors.brown),
-    Category(id: 'c7', title: 'Biscuits', color: Colors.black87),
-    Category(id: 'c8', title: 'Milk', color: Color.fromARGB(179, 26, 24, 24)),
+    Category(id: 'c7', title: 'Biscuits', color: Color.fromARGB(221, 228, 218, 218)),
+    Category(id: 'c8', title: 'Milk', color: Color.fromARGB(179, 190, 65, 65)),
     Category(id: 'c9', title: 'Alcohols', color: Colors.pink),
     Category(id: 'c10', title: 'Tunas', color: Colors.blue),
   ];
@@ -29,10 +29,10 @@ class DummyData {
         'Bruch buns with ketchup',
         'Serve burger with tomato, cucumber and onion'
       ],
-      duration: 1,
+      duration: 10,
       complexity: Complexity.simple,
       affordability: Affordability.affordable,
-      isGlutenFree: true,
+      isGlutenFree: false,
       isLactoseFree: true,
       isVegan: true,
       isVegetarian: true,

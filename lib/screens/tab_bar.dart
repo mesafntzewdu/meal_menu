@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:meals/data/dummy_data.dart';
 import 'package:meals/model/meal.dart';
 import 'package:meals/screens/categories.dart';
 import 'package:meals/screens/filter.dart';
 import 'package:meals/screens/meals_list.dart';
 import 'package:meals/widget/navigation_drawer.dart';
+
+const kFilterApplied = {
+  FilterEnum.glutenFree: false,
+  FilterEnum.lactoseFree: false,
+  FilterEnum.vegetarian: false,
+};
 
 class TabScreen extends StatefulWidget {
   const TabScreen({super.key});
@@ -15,6 +22,7 @@ class TabScreen extends StatefulWidget {
 
 class _TabScreenState extends State<TabScreen> {
   final List<Meal> _favoriteMeals = [];
+  Map<FilterEnum, bool> _selectedFilter = kFilterApplied;
 
   void _snakBarMessage(String message) {
     ScaffoldMessenger.of(context).clearSnackBars();
@@ -50,9 +58,22 @@ class _TabScreenState extends State<TabScreen> {
 
   @override
   Widget build(context) {
+    final availableMeals = DummyData.dummyMeals.where((meal) {
+      if (_selectedFilter[FilterEnum.glutenFree]! && !meal.isGlutenFree) {
+        return false;
+      }
+      if (_selectedFilter[FilterEnum.lactoseFree]! && !meal.isLactoseFree) {
+        return false;
+      }
+      if (_selectedFilter[FilterEnum.vegetarian]! && !meal.isVegan) {
+        return false;
+      }
+      return true;
+    }).toList();
     String title = 'Mesi Grocery';
     Widget content = CategoriesScreen(
       onFavToggle: _toggleMealFavoriteState,
+      availableMeals: availableMeals,
     );
     if (_selectedIndex == 1) {
       title = 'Favorites';
@@ -65,16 +86,20 @@ class _TabScreenState extends State<TabScreen> {
       );
     }
 
-    void setScreen(String ident) {
+    void setScreen(String ident) async {
       Navigator.of(context).pop();
       if (ident == 'Settings') {
-        Navigator.of(context).push(
+        var filterResult =
+            await Navigator.of(context).push<Map<FilterEnum, bool>>(
           MaterialPageRoute(
             builder: (context) {
               return const Filter();
             },
           ),
         );
+        setState(() {
+          _selectedFilter = filterResult ?? kFilterApplied;
+        });
       }
     }
 
