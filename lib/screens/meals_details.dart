@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:meals/model/meal.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class MealDetail extends StatelessWidget {
-  const MealDetail({super.key, required this.meal});
+  const MealDetail({super.key, required this.meal, required this.onFavToggle});
   final Meal meal;
+  final Function(Meal meal) onFavToggle;
   @override
   Widget build(context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Meal Detail'),
         elevation: 2,
+        actions: [
+          IconButton(
+              onPressed: () {
+                onFavToggle(meal);
+              },
+              icon: const Icon(Icons.favorite))
+        ],
       ),
       body: Column(
         children: [

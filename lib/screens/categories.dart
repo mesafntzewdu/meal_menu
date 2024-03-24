@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:meals/model/category.dart';
 import 'package:meals/data/dummy_data.dart';
+import 'package:meals/model/meal.dart';
 import 'package:meals/screens/meals_list.dart';
 import 'package:meals/widget/category_grid_item.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+  const CategoriesScreen({super.key, required this.onFavToggle});
+
+  final Function(Meal meal) onFavToggle;
+
   void _selectedCategory(BuildContext context, Category category) {
     final meals = DummyData.dummyMeals
         .where((meal) => meal.categories.contains(category.id))
@@ -15,6 +19,7 @@ class CategoriesScreen extends StatelessWidget {
         builder: (ctx) => MealsWidget(
           title: category.title,
           meal: meals,
+          onFavToggle: onFavToggle,
         ),
       ),
     );
@@ -23,10 +28,6 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 12,
-        title: const Text('Mesi Grocery'),
-      ),
       body: GridView(
         padding: const EdgeInsets.all(15),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -3,14 +3,23 @@ import 'package:meals/model/meal.dart';
 import 'package:meals/widget/meal_item.dart';
 
 class MealsWidget extends StatelessWidget {
-  const MealsWidget({super.key, required this.title, required this.meal});
+  const MealsWidget(
+      {super.key,
+      required this.title,
+      required this.meal,
+      required this.onFavToggle});
   final String title;
   final List<Meal> meal;
+  final Function(Meal meal) onFavToggle;
+
   @override
   Widget build(BuildContext context) {
     Widget content = ListView.builder(
       itemCount: meal.length,
-      itemBuilder: (ctx, index) => MealsItem(meal: meal[index]),
+      itemBuilder: (ctx, index) => MealsItem(
+        meal: meal[index],
+        onFavToggle: onFavToggle,
+      ),
     );
     if (meal.isEmpty) {
       content = Center(
@@ -37,10 +46,15 @@ class MealsWidget extends StatelessWidget {
       );
     }
 
+    if (title.contains('Favorites')) {
+      return Scaffold(
+        body: content,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        elevation: 2,
       ),
       body: content,
     );
