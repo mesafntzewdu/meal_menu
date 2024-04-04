@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals/model/meal.dart';
+import 'package:meals/provider/favorites_provider.dart';
 
-class MealDetail extends StatelessWidget {
-  const MealDetail({super.key, required this.meal, required this.onFavToggle});
+class MealDetail extends ConsumerWidget {
+  const MealDetail({
+    super.key,
+    required this.meal,
+  });
   final Meal meal;
-  final Function(Meal meal) onFavToggle;
   @override
-  Widget build(context) {
+  Widget build(context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Meal Detail'),
@@ -14,7 +18,16 @@ class MealDetail extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                onFavToggle(meal);
+                var result = ref
+                    .read(favoriteMealsProvider.notifier)
+                    .toggleMealsList(meal);
+                ScaffoldMessenger.of(context).clearSnackBars();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(result ? 'Meal added' : 'Meal removed'),
+                    action: SnackBarAction(label: 'Undo', onPressed: () {}),
+                  ),
+                );
               },
               icon: const Icon(Icons.favorite))
         ],

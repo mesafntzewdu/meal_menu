@@ -7,10 +7,10 @@ class MealsWidget extends StatelessWidget {
       {super.key,
       required this.title,
       required this.meal,
-      required this.onFavToggle});
+     });
   final String title;
   final List<Meal> meal;
-  final Function(Meal meal) onFavToggle;
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class MealsWidget extends StatelessWidget {
       itemCount: meal.length,
       itemBuilder: (ctx, index) => MealsItem(
         meal: meal[index],
-        onFavToggle: onFavToggle,
+     
       ),
     );
     if (meal.isEmpty) {
@@ -29,7 +29,7 @@ class MealsWidget extends StatelessWidget {
             Text(
               'Uh oh.....nothing here!',
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
             ),
             const SizedBox(
@@ -38,7 +38,7 @@ class MealsWidget extends StatelessWidget {
             Text(
               'Try selecting a different category.',
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
             )
           ],

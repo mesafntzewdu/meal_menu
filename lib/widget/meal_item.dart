@@ -5,8 +5,8 @@ import 'package:meals/widget/meal_traits.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class MealsItem extends StatelessWidget {
-  const MealsItem({super.key, required this.meal, required this.onFavToggle});
-  final Function(Meal meal) onFavToggle;
+  const MealsItem({super.key, required this.meal});
+
 
   final Meal meal;
 
@@ -26,7 +26,7 @@ class MealsItem extends StatelessWidget {
         builder: (context) {
           return MealDetail(
             meal: meal,
-            onFavToggle: onFavToggle,
+
           );
         },
       ),
